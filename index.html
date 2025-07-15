@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Karaoke - Jaga Selalu Hatimu</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #lyrics span {
+      display: block;
+      font-size: 24px;
+      margin: 10px 0;
+      opacity: 0.3;
+      transition: 0.5s;
+    }
+    .active {
+      color: greenyellow;
+      font-weight: bold;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎤 Karaoke: Jaga Selalu Hatimu</h1>
+  <audio id="audio" controls>
+    <source src="jaga selalu hatimu.mp3" type="audio/mp3">
+    Browser kamu tidak mendukung audio.
+  </audio>
+  <div id="lyrics"></div>
+
+  <script>
+    const lyrics = [
+      { time: 0, text: "Kau jaga selalu hatimu" },
+      { time: 5, text: "Saat jauh dariku tunggu aku kembali" },
+      { time: 10, text: "---"}, 
+      { time: 27, text: "Ha-aa, ah-ah-ah" },
+      { time: 30, text: "----" }, 
+      { time: 42, text: "Mencintaimu, aku tenang" },
+      { time: 48, text: "Memilikimu, aku ada" },
+      { time: 54, text: "Di setiap engkau membuka mata" },
+      { time: 62, text: "Merindukanmu, selalu kurasakan" },
+      { time: 69, text: "Selalu memelukmu, penuh cinta" },
+      { time: 77, text: "Itu yang selalu aku inginkan" },
+      { time: 84, text: "Kau mampu" }, 
+     { time: 87, text: "membuatku tersenyum" },
+      { time: 91, text: "Dan kau bisa" }, 
+      { time: 94, text: "membuat nafasku lebih berarti" },
+      { time: 106, text: "Kau jaga selalu hatimu" },
+      { time: 110, text: "Saat jauh dariku tunggu aku kembali" },
+      { time: 119, text: "'Ku mencintaimu selalu" },
+      { time: 124, text: "Menyayangimu sampai akhir menutup mata" },
+      { time: 135, text: "Aa-ah-ah-ah-ah (jaga selalu hatimu), oh" },
+      { time: 141, text: "Aa-ah-ah-ah-ah (jaga selalu hatimu), hu-uu" },
+      { time: 154, text: "Oh, ah-ah-ah-ah-ah (hu-uu)" },
+      { time: 162, text: "-----"}, 
+      { time: 166, text: "Kau mampu" }, 
+      { time: 169, text: "membuatku tersenyum" },
+      { time: 173, text: "Dan kau bisa" }, 
+      { time: 176, text: "membuat nafasku lebih berarti (oh-oh)" }, 
+      { time: 183, text: "Kau jaga selalu hatimu" },
+      { time: 191, text: "Saat jauh dariku tunggu aku kembali(ha-aa,ah-ah-ah)" },
+      { time: 202, text: "'Ku mencintaimu selalu" },
+      { time: 206, text: "Menyayangimu sampai akhir menutup mata" },
+      { time: 214, text: "Oh, kau jaga selalu hatimu" },
+      { time: 220, text: "Saat jauh dariku tunggu aku kembali(tunggu aku kembali)" },
+      { time: 220, text: "'Ku mencintaimu selalu" },
+      { time: 229, text: "Menyayangimu sampai akhir menutup mata" },
+      { time: 235, text: "(oh-ah)Jaga selalu hatimu" },
+      { time: 244, text: "saat jauh dari ku tunggu aku kembali"}, 
+      { time: 247, text: "(Aa-ah-ah-ah-ah) aku mencintaimu"}, 
+      { time: 247, text: "selalu menyayangimu sampai akhir menutup mata"}, 
+      { time: 262, text: "kau jaga selalu hatimu"}, 
+      
+    ];
+
+    const lyricsContainer = document.getElementById('lyrics');
+    const audio = document.getElementById('audio');
+
+    lyrics.forEach(line => {
+      const span = document.createElement('span');
+      span.textContent = line.text;
+      lyricsContainer.appendChild(span);
+    });
+
+    const spans = lyricsContainer.querySelectorAll('span');
+
+    audio.ontimeupdate = () => {
+      const currentTime = audio.currentTime;
+      for (let i = 0; i < lyrics.length; i++) {
+        if (currentTime >= lyrics[i].time && (!lyrics[i + 1] || currentTime < lyrics[i + 1].time)) {
+          spans.forEach(span => span.classList.remove('active'));
+          spans[i].classList.add('active');
+          break;
+        }
+      }
+    };
+  </script>
+</body>
+</html>
